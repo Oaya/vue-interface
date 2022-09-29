@@ -1,7 +1,7 @@
 <template>
   <div id="main-app" class="container">
-    <div class="row justify-content-center">
-      <appointments-list :appointments="appointments" />
+    <div class="flex-row justify-center">
+      <appointments-list :appointments="appointments" @remove="removeItem" @edit="editItem" />
     </div>
   </div>
 </template>
@@ -9,14 +9,15 @@
 <script>
 // import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import AppointmentsList from "./components/AppointmentList";
+import _ from "lodash";
 import axios from "axios";
 
 export default {
   name: "MainApp",
   data() {
     return {
-      title: "Appointment List",
       appointments: [],
+      aptIndex: 0
     };
   },
   components: {
@@ -26,7 +27,22 @@ export default {
   mounted() {
     axios
       .get("./data/appointments.json")
-      .then((res) => (this.appointments = res.data));
+      .then((res) => (this.appointments = res.data.map(item => {
+        item.aptId = this.aptIndex;
+        this.aptIndex++;
+        return item
+      })));
+  },
+  methods: {
+    removeItem: function (apt) {
+      this.appointments = _.without(this.appointments, apt);
+    },
+    editItem: function (id, field, text) {
+      const aptIndex = _.findIndex(this.appointments, {
+        aptId: id
+      });
+      this.appointments[aptIndex][field] = text;
+    }
   },
 };
 </script>
