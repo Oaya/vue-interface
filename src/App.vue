@@ -1,16 +1,18 @@
 <template>
-  <div id="main-app" class="container">
-    <div class="flex-row justify-center">
+  <div id="main-app" class="container mx-auto">
+    <div class="justify-center">
+      <add-appointment />
       <appointments-list :appointments="appointments" @remove="removeItem" @edit="editItem" />
     </div>
   </div>
 </template>
 
 <script>
-// import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import AddAppointment from "./components/AddAppointment";
 import AppointmentsList from "./components/AppointmentList";
 import _ from "lodash";
 import axios from "axios";
+
 
 export default {
   name: "MainApp",
@@ -21,8 +23,8 @@ export default {
     };
   },
   components: {
-    // FontAwesomeIcon,
-    AppointmentsList,
+    AddAppointment,
+    AppointmentsList
   },
   mounted() {
     axios

@@ -4,5 +4,7 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    require("@thoughtbot/tailwindcss-aria-attributes"),
+  ],
 }

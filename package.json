@@ -12,6 +12,7 @@
     "@fortawesome/fontawesome-svg-core": "^6.2.0",
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
     "@fortawesome/vue-fontawesome": "^3.0.1",
+    "@thoughtbot/tailwindcss-aria-attributes": "^0.2.0",
     "axios": "^0.27.2",
     "core-js": "^3.8.3",
     "jquery": "^3.6.1",
