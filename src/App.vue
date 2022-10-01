@@ -1,8 +1,10 @@
 <template>
   <div id="main-app" class="container mx-auto">
     <div class="justify-center">
-      <add-appointment />
+      <add-appointment @add="addItem" />
+      <search-appointment />
       <appointments-list :appointments="appointments" @remove="removeItem" @edit="editItem" />
+
     </div>
   </div>
 </template>
@@ -10,6 +12,7 @@
 <script>
 import AddAppointment from "./components/AddAppointment";
 import AppointmentsList from "./components/AppointmentList";
+import SearchAppointment from "./components/SearchAppointment";
 import _ from "lodash";
 import axios from "axios";
 
@@ -24,7 +27,8 @@ export default {
   },
   components: {
     AddAppointment,
-    AppointmentsList
+    AppointmentsList,
+    SearchAppointment
   },
   mounted() {
     axios
@@ -44,6 +48,14 @@ export default {
         aptId: id
       });
       this.appointments[aptIndex][field] = text;
+    },
+    addItem: function (item) {
+      item.id = this.aptIndex
+      this.aptIndex++
+
+      this.appointments.push(item)
+      console.log(this.appointments)
+
     }
   },
 };

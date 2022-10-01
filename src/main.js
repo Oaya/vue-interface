@@ -1,4 +1,5 @@
 import { createApp } from 'vue';
+import 'flowbite';
 import App from './App.vue';
 import './styles/app.css'
 import { library } from '@fortawesome/fontawesome-svg-core';
