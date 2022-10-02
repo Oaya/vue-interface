@@ -2,7 +2,7 @@
   <div class="px-4 flex flex-row justify-center w-full">
 
     <div class="mt-4 text-md w-full">
-      <input id="SearchApts" placeholder="Search" type="text" class="py-3 px-4 rounded-l shadow-md border border-gray-200 w-full
+      <input v-model="searchTerm" id="SearchApts" placeholder="Search" type="text" class="py-3 px-4 rounded-l shadow-md border border-gray-200 w-full
           focus:outline-none focus:border-blue-300 
           active:outline-none active:border-blue-300 " aria-label="Search Appointments" />
     </div>
@@ -45,7 +45,7 @@
               text-base
               z-50
               float-left
-              py-3
+              py-6
               list-none
               text-left
               rounded-lg
@@ -60,8 +60,8 @@
           <a class="
                   dropdown-item
                   text-sm
-                  py-3
-                  px-4
+                  py-2
+                  px-6
                   font-normal
                   block
                   w-full
@@ -79,7 +79,7 @@
                   dropdown-item
                   text-sm
                   py-2
-                  px-4
+                  px-6
                   font-normal
                   block
                   w-full
@@ -97,7 +97,7 @@
                   dropdown-item
                   text-sm
                   py-2
-                  px-4
+                  px-6
                   font-normal
                   block
                   w-full
@@ -116,7 +116,7 @@
                   dropdown-item
                   text-sm
                   py-2
-                  px-4
+                  px-6
                   font-normal
                   block
                   w-full
@@ -134,7 +134,7 @@
                   dropdown-item
                   text-sm
                   py-2
-                  px-4
+                  px-6
                   font-normal
                   block
                   w-full
@@ -159,6 +159,11 @@ export default {
   data() {
     return {
       searchTerm: ''
+    }
+  },
+  watch: {
+    searchTerm: function () {
+      this.$emit('searchRecords', this.searchTerm)
     }
   },
   components: { FontAwesomeIcon }

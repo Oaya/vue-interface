@@ -2,8 +2,8 @@
   <div id="main-app" class="container mx-auto">
     <div class="justify-center">
       <add-appointment @add="addItem" />
-      <search-appointment />
-      <appointments-list :appointments="appointments" @remove="removeItem" @edit="editItem" />
+      <search-appointment @searchRecords="searchAppointment" />
+      <appointments-list :appointments="searchedApts" @remove="removeItem" @edit="editItem" />
 
     </div>
   </div>
@@ -22,7 +22,8 @@ export default {
   data() {
     return {
       appointments: [],
-      aptIndex: 0
+      aptIndex: 0,
+      searchTerms: ''
     };
   },
   components: {
@@ -30,6 +31,7 @@ export default {
     AppointmentsList,
     SearchAppointment
   },
+
   mounted() {
     axios
       .get("./data/appointments.json")
@@ -39,7 +41,21 @@ export default {
         return item
       })));
   },
+  computed: {
+    searchedApts: function () {
+      return this.appointments.filter(item => {
+        return (
+          item.petName.toLowerCase().match(this.searchTerms.toLowerCase()) ||
+          item.petOwner.toLowerCase().match(this.searchTerms.toLowerCase()) ||
+          item.aptNotes.toLowerCase().match(this.searchTerms.toLowerCase())
+        )
+      })
+    }
+  },
   methods: {
+    searchAppointment: function (terms) {
+      this.searchTerms = terms;
+    },
     removeItem: function (apt) {
       this.appointments = _.without(this.appointments, apt);
     },
