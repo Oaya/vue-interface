@@ -69,9 +69,9 @@
                   bg-transparent
                   text-gray-700
                   hover:bg-gray-100
-                " href="#" id="petName">
+                " href="#" id="petName" @click="$emit('requestKey', 'petName')">
             Pet Name
-            <font-awesome-icon icon="check" />
+            <font-awesome-icon icon="check" v-if="myKey==='petName'" />
           </a>
         </li>
         <li>
@@ -87,9 +87,9 @@
                   bg-transparent
                   text-gray-700
                   hover:bg-gray-100
-                " href="#" id="aptDate">
+                " href="#" id="aptDate" @click="$emit('requestKey', 'aptDate')">
             Date
-            <font-awesome-icon icon="check" />
+            <font-awesome-icon icon="check" v-if="myKey==='aptDate'" />
           </a>
         </li>
         <li>
@@ -105,9 +105,9 @@
                   bg-transparent
                   text-gray-700
                   hover:bg-gray-100
-                " href="#" id="ownerName">
+                " href="#" id="ownerName" @click="$emit('requestKey', 'petOwner')">
             Owner
-            <font-awesome-icon icon="check" />
+            <font-awesome-icon icon="check" v-if="myKey==='petOwner'" />
           </a>
         </li>
         <hr class="h-0 my-2 border border-solid border-t-0 border-gray-700 opacity-25" />
@@ -124,9 +124,9 @@
                   bg-transparent
                   text-gray-700
                   hover:bg-gray-100
-                " href="#" id="asc">
+                " href="#" id="asc" @click="$emit('requestDir', 'asc')">
             Asc
-            <font-awesome-icon icon="check" />
+            <font-awesome-icon icon="check" v-if="myDir==='asc'" />
           </a>
         </li>
         <li>
@@ -142,9 +142,9 @@
                   bg-transparent
                   text-gray-700
                   hover:bg-gray-100
-                " href="#" id="desc">
+                " href="#" id="desc" @click="$emit('requestDir', 'desc')">
             Desc
-            <font-awesome-icon icon="check" />
+            <font-awesome-icon icon="check" v-if="myDir==='desc'" />
           </a>
         </li>
       </ul>
@@ -161,6 +161,7 @@ export default {
       searchTerm: ''
     }
   },
+  props: ["myKey", "myDir"],
   watch: {
     searchTerm: function () {
       this.$emit('searchRecords', this.searchTerm)
